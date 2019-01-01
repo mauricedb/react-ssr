@@ -1,0 +1,28 @@
+{
+  "name": "react-ssr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mauricedb/react-ssr.git"
+  },
+  "keywords": [],
+  "author": "Maurice de Beijer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mauricedb/react-ssr/issues"
+  },
+  "homepage": "https://github.com/mauricedb/react-ssr#readme",
+  "dependencies": {
+    "next": "^7.0.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  }
+}
