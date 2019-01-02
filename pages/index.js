@@ -7,7 +7,6 @@ const indexPage = ({ movies }) => (
         <a>Movies</a>
       </Link>
     </nav>
-    <div>Welcome to next.js!</div>
   </div>
 );
 

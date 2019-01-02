@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import fetch from 'isomorphic-fetch';
-
 
 import MovieRow from '../components/MovieRow';
 
@@ -10,13 +9,6 @@ class MovieList extends Component {
     const movies = await rsp.json();
     return { movies };
   }
-  //   componentDidMount() {
-  //     if (!this.props.movies.length) {
-  //       fetch("/api/movies")
-  //         .then(rsp => rsp.json())
-  //         .then(movies => this.props.moviesLoaded(movies));
-  //     }
-  //   }
 
   render() {
     const rows = this.props.movies.map(movie => (
