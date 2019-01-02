@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import Link from 'next/link';
+import Router from 'next/router';
 
 import InputText from '../components/InputText';
 import TextArea from '../components/TextArea';
@@ -8,33 +9,44 @@ class MovieEdit extends Component {
   static async getInitialProps({ query }) {
     const id = query.id;
     const rsp = await fetch(`http://localhost:3001/api/movies/${id}`);
-    const movie = await rsp.json();
-    return { movie };
+    const fetchedMovie = await rsp.json();
+    return { fetchedMovie };
   }
 
+  static getDerivedStateFromProps(props, state) {
+    if (state.movie && state.movie.id === props.fetchedMovie.id) {
+      return null;
+    }
+
+    return {
+      movie: props.fetchedMovie
+    };
+  }
+
+  state = { movie: null };
+
   onChange = e => {
-    this.props.currentMoviePropChanged(e.prop, e.value);
+    const { movie } = this.state;
+    this.setState({ movie: { ...movie, [e.prop]: e.value } });
   };
 
   save = e => {
     e.preventDefault();
-    console.log(this.props.movie);
-    this.props.clearMovies();
 
-    const id = this.props.match.params.id;
-    const { movie } = this.props;
+    const { movie } = this.state;
+    const { id } = movie;
 
-    fetch('/api/movies/' + id, {
+    fetch('http://localhost:3001/api/movies/' + id, {
       headers: {
         'Content-Type': 'application/json'
       },
       method: 'put',
       body: JSON.stringify(movie)
-    }).then(() => this.props.history.push('/movies'));
+    }).then(() => Router.push('/movies'));
   };
 
   render() {
-    const { movie } = this.props;
+    const { movie } = this.state;
     if (!movie) return null;
 
     return (
